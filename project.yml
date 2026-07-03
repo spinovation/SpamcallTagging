@@ -1,0 +1,43 @@
+name: DeepSCI
+options:
+  bundleIdPrefix: com.deepsci
+targets:
+  DeepSCI:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: DeepSCI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.deepsci.app
+        INFOPLIST_KEY_CFBundleDisplayName: "Deep SCI"
+        INFOPLIST_KEY_UILaunchScreen_Generation: Yes
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        DEVELOPMENT_TEAM: "" # User can fill this in Xcode
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+    dependencies:
+      - target: DeepSCIDirectory
+  DeepSCIDirectory:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: DeepSCIDirectory
+    info:
+      path: DeepSCIDirectory/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.callkit.call-directory
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).CallDirectoryHandler
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.deepsci.app.directory
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"

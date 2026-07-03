@@ -1,0 +1,513 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		068B1F7FF99C47883EA18AF4 /* NumberDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1428010DA51525F3AD3BBB7 /* NumberDetailView.swift */; };
+		1A46ADE9B56F65C485EDBF6B /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6276A6CB4CFE844F6F9846CF /* KeychainManager.swift */; };
+		2FEA08B5B51323AE2F5DC9D5 /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5380794A2DF8C56EC1853E /* CallDirectoryHandler.swift */; };
+		3920D76C345ABAB6CD5EC8BD /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EE584ADB35231AA3BA3B0F /* MainTabView.swift */; };
+		4197606E0F049FAA504C3C5B /* SpamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631436001130269D0428E776 /* SpamManager.swift */; };
+		6B42443C2D4C95680955A910 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0314AEA50701E78E332A0B0 /* DirectoryView.swift */; };
+		758F442EF4DE9B89FD9B0675 /* SpamTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53EDC1A9C4F31DB201F6A8 /* SpamTag.swift */; };
+		7A218F75AC0A0DD8B018C789 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B076D02F9AF51984976DE /* DashboardView.swift */; };
+		8573B011D0D4351754E74218 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF632F9A23EDC091CA08EBD0 /* SyncService.swift */; };
+		926B214D1AB8419ACB7A14C2 /* DeepSCIDirectory.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 535AAED17E06847152FD6FFF /* DeepSCIDirectory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9D27B6ACF358745B37DC0C82 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A46C6C3D5A25AFA89F8F86 /* SettingsView.swift */; };
+		BE461FD621369F3283FC1A69 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03072B96F5E8D3B9C62B1E05 /* DatabaseManager.swift */; };
+		BEA3078493C83784B2C11EC3 /* SpamNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E846E44F56465D71CAED16D /* SpamNumber.swift */; };
+		C572DB3C0B1F52B871BA4DDD /* SimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC5525AC8C97574E2AA998E /* SimulatorView.swift */; };
+		CF75B3C9686CE44395C227E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3E4FABD01A0C4688B59410B /* Assets.xcassets */; };
+		FF5AD09D89E782B9D5019F77 /* DeepSCIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286FA2B6127D85E83175FFD2 /* DeepSCIApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8AF69A4ACC7F2932BB2C8ECF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33FAC984F809879DBA7C2165 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 286CF64B74EE05524160E5CB;
+			remoteInfo = DeepSCIDirectory;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		46E2092574DBBF9870CF4FF0 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				926B214D1AB8419ACB7A14C2 /* DeepSCIDirectory.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		03072B96F5E8D3B9C62B1E05 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		047B076D02F9AF51984976DE /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		09EE584ADB35231AA3BA3B0F /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		0E846E44F56465D71CAED16D /* SpamNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamNumber.swift; sourceTree = "<group>"; };
+		286FA2B6127D85E83175FFD2 /* DeepSCIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepSCIApp.swift; sourceTree = "<group>"; };
+		2EC5525AC8C97574E2AA998E /* SimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorView.swift; sourceTree = "<group>"; };
+		535AAED17E06847152FD6FFF /* DeepSCIDirectory.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DeepSCIDirectory.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		550DD99BD22FA2A297A61910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6276A6CB4CFE844F6F9846CF /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		631436001130269D0428E776 /* SpamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamManager.swift; sourceTree = "<group>"; };
+		63A46C6C3D5A25AFA89F8F86 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8B53EDC1A9C4F31DB201F6A8 /* SpamTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamTag.swift; sourceTree = "<group>"; };
+		AB5380794A2DF8C56EC1853E /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		C3E4FABD01A0C4688B59410B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C6EB1346B947E47BCDA0B10E /* DeepSCI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeepSCI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1428010DA51525F3AD3BBB7 /* NumberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDetailView.swift; sourceTree = "<group>"; };
+		E0314AEA50701E78E332A0B0 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
+		EF632F9A23EDC091CA08EBD0 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3C0F548F10C67D8B0D711E8F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				03072B96F5E8D3B9C62B1E05 /* DatabaseManager.swift */,
+				6276A6CB4CFE844F6F9846CF /* KeychainManager.swift */,
+				631436001130269D0428E776 /* SpamManager.swift */,
+				EF632F9A23EDC091CA08EBD0 /* SyncService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		495722D20F8160A5DD336690 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E846E44F56465D71CAED16D /* SpamNumber.swift */,
+				8B53EDC1A9C4F31DB201F6A8 /* SpamTag.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		67D9FC4A2296607316DFBA50 = {
+			isa = PBXGroup;
+			children = (
+				D7B2853A7853E20F7A9F8905 /* DeepSCI */,
+				A91440CA6CB1138546ECA534 /* DeepSCIDirectory */,
+				6E53BC78C0915897D03D2AAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E53BC78C0915897D03D2AAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6EB1346B947E47BCDA0B10E /* DeepSCI.app */,
+				535AAED17E06847152FD6FFF /* DeepSCIDirectory.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8AFAA8E9E48B5A604FA8CDE4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				047B076D02F9AF51984976DE /* DashboardView.swift */,
+				E0314AEA50701E78E332A0B0 /* DirectoryView.swift */,
+				09EE584ADB35231AA3BA3B0F /* MainTabView.swift */,
+				D1428010DA51525F3AD3BBB7 /* NumberDetailView.swift */,
+				63A46C6C3D5A25AFA89F8F86 /* SettingsView.swift */,
+				2EC5525AC8C97574E2AA998E /* SimulatorView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A91440CA6CB1138546ECA534 /* DeepSCIDirectory */ = {
+			isa = PBXGroup;
+			children = (
+				AB5380794A2DF8C56EC1853E /* CallDirectoryHandler.swift */,
+				550DD99BD22FA2A297A61910 /* Info.plist */,
+			);
+			path = DeepSCIDirectory;
+			sourceTree = "<group>";
+		};
+		D7B2853A7853E20F7A9F8905 /* DeepSCI */ = {
+			isa = PBXGroup;
+			children = (
+				C3E4FABD01A0C4688B59410B /* Assets.xcassets */,
+				286FA2B6127D85E83175FFD2 /* DeepSCIApp.swift */,
+				495722D20F8160A5DD336690 /* Models */,
+				3C0F548F10C67D8B0D711E8F /* Services */,
+				8AFAA8E9E48B5A604FA8CDE4 /* Views */,
+			);
+			path = DeepSCI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		286CF64B74EE05524160E5CB /* DeepSCIDirectory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8083BB09360E3DC6D9A3BAA /* Build configuration list for PBXNativeTarget "DeepSCIDirectory" */;
+			buildPhases = (
+				E5017FC418125EBEAF0F3E18 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeepSCIDirectory;
+			packageProductDependencies = (
+			);
+			productName = DeepSCIDirectory;
+			productReference = 535AAED17E06847152FD6FFF /* DeepSCIDirectory.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E0F24A8FE81BF4CD95748700 /* DeepSCI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52FE884D95754D0BE82321E9 /* Build configuration list for PBXNativeTarget "DeepSCI" */;
+			buildPhases = (
+				DCAD8395E4396EEFED02F718 /* Sources */,
+				38C10265E347769E8465B2EF /* Resources */,
+				46E2092574DBBF9870CF4FF0 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				58B3C724C37BE53CDA46DBBA /* PBXTargetDependency */,
+			);
+			name = DeepSCI;
+			packageProductDependencies = (
+			);
+			productName = DeepSCI;
+			productReference = C6EB1346B947E47BCDA0B10E /* DeepSCI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		33FAC984F809879DBA7C2165 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					286CF64B74EE05524160E5CB = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					E0F24A8FE81BF4CD95748700 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9FA0CBA53684942571F2E5F8 /* Build configuration list for PBXProject "DeepSCI" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 67D9FC4A2296607316DFBA50;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6E53BC78C0915897D03D2AAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E0F24A8FE81BF4CD95748700 /* DeepSCI */,
+				286CF64B74EE05524160E5CB /* DeepSCIDirectory */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38C10265E347769E8465B2EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF75B3C9686CE44395C227E6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCAD8395E4396EEFED02F718 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A218F75AC0A0DD8B018C789 /* DashboardView.swift in Sources */,
+				BE461FD621369F3283FC1A69 /* DatabaseManager.swift in Sources */,
+				FF5AD09D89E782B9D5019F77 /* DeepSCIApp.swift in Sources */,
+				6B42443C2D4C95680955A910 /* DirectoryView.swift in Sources */,
+				1A46ADE9B56F65C485EDBF6B /* KeychainManager.swift in Sources */,
+				3920D76C345ABAB6CD5EC8BD /* MainTabView.swift in Sources */,
+				068B1F7FF99C47883EA18AF4 /* NumberDetailView.swift in Sources */,
+				9D27B6ACF358745B37DC0C82 /* SettingsView.swift in Sources */,
+				C572DB3C0B1F52B871BA4DDD /* SimulatorView.swift in Sources */,
+				4197606E0F049FAA504C3C5B /* SpamManager.swift in Sources */,
+				BEA3078493C83784B2C11EC3 /* SpamNumber.swift in Sources */,
+				758F442EF4DE9B89FD9B0675 /* SpamTag.swift in Sources */,
+				8573B011D0D4351754E74218 /* SyncService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5017FC418125EBEAF0F3E18 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FEA08B5B51323AE2F5DC9D5 /* CallDirectoryHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		58B3C724C37BE53CDA46DBBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 286CF64B74EE05524160E5CB /* DeepSCIDirectory */;
+			targetProxy = 8AF69A4ACC7F2932BB2C8ECF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2A87BDA45B8EE8AB10F0D392 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4ADVSK467Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Deep SCI";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.deepsci.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3CA8DA03228FC858F3D6BEA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = DeepSCIDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.deepsci.app.directory;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		42A2F613D8B79613F4465954 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4ADVSK467Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Deep SCI";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.deepsci.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		45D9475B206990AF621BC05C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = DeepSCIDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.deepsci.app.directory;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A6519204B20B2545EF8D15E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A8C0B43C0D0A660F089F731C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		52FE884D95754D0BE82321E9 /* Build configuration list for PBXNativeTarget "DeepSCI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42A2F613D8B79613F4465954 /* Debug */,
+				2A87BDA45B8EE8AB10F0D392 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9FA0CBA53684942571F2E5F8 /* Build configuration list for PBXProject "DeepSCI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8C0B43C0D0A660F089F731C /* Debug */,
+				A6519204B20B2545EF8D15E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A8083BB09360E3DC6D9A3BAA /* Build configuration list for PBXNativeTarget "DeepSCIDirectory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45D9475B206990AF621BC05C /* Debug */,
+				3CA8DA03228FC858F3D6BEA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 33FAC984F809879DBA7C2165 /* Project object */;
+}
