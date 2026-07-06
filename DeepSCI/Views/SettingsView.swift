@@ -140,6 +140,18 @@ struct SettingsView: View {
                     }
                 }
                 .listRowBackground(Color.white.opacity(0.02))
+                
+                // MARK: - App Version Info
+                Section("App Information") {
+                    HStack {
+                        Text("App Version")
+                            .foregroundColor(.white)
+                        Spacer()
+                        Text("\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"))")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .listRowBackground(Color.white.opacity(0.02))
             }
             .navigationTitle("Settings")
             .onAppear {

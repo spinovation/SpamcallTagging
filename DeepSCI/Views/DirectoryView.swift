@@ -6,6 +6,7 @@ struct DirectoryView: View {
     @State private var selectedCategory: String = "All"
     @State private var selectedTier: Int = 0 // 0 = All, 1 = Tier 1, 2 = Tier 2, 3 = Tier 3
     @State private var sortBy: SortOption = .volume
+    @State private var showManualReportSheet: Bool = false
     
     enum SortOption {
         case volume, recency, number
@@ -167,6 +168,22 @@ struct DirectoryView: View {
             .navigationDestination(for: SpamNumber.self) { num in
                 NumberDetailView(number: num)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showManualReportSheet = true }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+            .sheet(isPresented: $showManualReportSheet) {
+                ManualReportSheet { phone, category in
+                    // Clean and submit
+                    manager.tagNumber(phoneNumber: phone, category: category, geoRegion: "Manual")
+                }
+                .presentationDetents([.fraction(0.60)])
+            }
         }
     }
     
@@ -259,6 +276,122 @@ struct DirectoryRowView: View {
         case 2: return "Silenced"
         case 1: return "Suspected"
         default: return "Low Risk"
+        }
+    }
+}
+
+// MARK: - Manual Report Sheet Subview
+
+struct ManualReportSheet: View {
+    @State private var phoneNumber: String = ""
+    @State private var selectedCategory: String = "Scam/Fraud"
+    @Environment(\.dismiss) private var dismiss
+    
+    let categories = [
+        ("Scam / Fraud", "Scam/Fraud", Color.red, "xmark.shield.fill"),
+        ("Robocall", "Robocall", Color.purple, "cpu"),
+        ("Telemarketing", "Spam/Telemarketing", Color.orange, "phone.bubble.left.fill"),
+        ("Not Spam", "Not Spam", Color.green, "checkmark.shield.fill")
+    ]
+    
+    var onTagSubmitted: (String, String) -> Void
+    
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 20) {
+                Text("Report a Spam Number")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top)
+                
+                Text("Enter the phone number that called you to tag and add it to the Deep SCI spam database.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                // Phone Number Input
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Phone Number")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        Image(systemName: "phone.fill")
+                            .foregroundColor(.secondary)
+                        TextField("+1 (555) 000-0000", text: $phoneNumber)
+                            .keyboardType(.phonePad)
+                            .foregroundColor(.white)
+                            .autocorrectionDisabled()
+                    }
+                    .padding()
+                    .background(Color.white.opacity(0.06))
+                    .cornerRadius(12)
+                }
+                
+                // Category Picker
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Select Spam Category")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.secondary)
+                    
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                        ForEach(categories, id: \.1) { name, key, color, icon in
+                            Button(action: {
+                                selectedCategory = key
+                            }) {
+                                HStack {
+                                    Image(systemName: icon)
+                                    Text(name)
+                                        .font(.caption)
+                                        .fontWeight(.semibold)
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                                .background(selectedCategory == key ? color.opacity(0.2) : Color.white.opacity(0.05))
+                                .cornerRadius(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(selectedCategory == key ? color : Color.white.opacity(0.1), lineWidth: 1.5)
+                                )
+                            }
+                        }
+                    }
+                }
+                
+                Spacer()
+                
+                // Submit Button
+                Button(action: {
+                    let cleaned = phoneNumber.filter { $0.isNumber || $0 == "+" }
+                    guard !cleaned.isEmpty else { return }
+                    onTagSubmitted(cleaned, selectedCategory)
+                    dismiss()
+                }) {
+                    Text("Submit Report")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(phoneNumber.filter { $0.isNumber }.isEmpty ? Color.gray.opacity(0.3) : Color.red)
+                        .cornerRadius(12)
+                }
+                .disabled(phoneNumber.filter { $0.isNumber }.isEmpty)
+                .padding(.bottom)
+            }
+            .padding()
+            .background(Color(.systemGray6))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") { dismiss() }
+                        .foregroundColor(.red)
+                }
+            }
         }
     }
 }

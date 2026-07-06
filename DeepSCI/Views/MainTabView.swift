@@ -28,6 +28,12 @@ struct MainTabView: View {
                     Label("Settings", systemImage: "gearshape.fill")
                 }
                 .tag(3)
+            
+            HelpView()
+                .tabItem {
+                    Label("Help", systemImage: "questionmark.circle.fill")
+                }
+                .tag(4)
         }
         .tint(.red) // Custom theme color
     }

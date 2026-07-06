@@ -22,6 +22,7 @@
 		BEA3078493C83784B2C11EC3 /* SpamNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E846E44F56465D71CAED16D /* SpamNumber.swift */; };
 		C572DB3C0B1F52B871BA4DDD /* SimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC5525AC8C97574E2AA998E /* SimulatorView.swift */; };
 		CF75B3C9686CE44395C227E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3E4FABD01A0C4688B59410B /* Assets.xcassets */; };
+		F55C1A8CD3780456D44A54C3 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23A17DA9682B42FEC4CB6FF /* HelpView.swift */; };
 		FF5AD09D89E782B9D5019F77 /* DeepSCIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286FA2B6127D85E83175FFD2 /* DeepSCIApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,13 +57,14 @@
 		0E846E44F56465D71CAED16D /* SpamNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamNumber.swift; sourceTree = "<group>"; };
 		286FA2B6127D85E83175FFD2 /* DeepSCIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepSCIApp.swift; sourceTree = "<group>"; };
 		2EC5525AC8C97574E2AA998E /* SimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorView.swift; sourceTree = "<group>"; };
-		535AAED17E06847152FD6FFF /* DeepSCIDirectory.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = DeepSCIDirectory.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		535AAED17E06847152FD6FFF /* DeepSCIDirectory.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeepSCIDirectory.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		550DD99BD22FA2A297A61910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6276A6CB4CFE844F6F9846CF /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		631436001130269D0428E776 /* SpamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamManager.swift; sourceTree = "<group>"; };
 		63A46C6C3D5A25AFA89F8F86 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8B53EDC1A9C4F31DB201F6A8 /* SpamTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamTag.swift; sourceTree = "<group>"; };
 		AB5380794A2DF8C56EC1853E /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		B23A17DA9682B42FEC4CB6FF /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		C3E4FABD01A0C4688B59410B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6EB1346B947E47BCDA0B10E /* DeepSCI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeepSCI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1428010DA51525F3AD3BBB7 /* NumberDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDetailView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				047B076D02F9AF51984976DE /* DashboardView.swift */,
 				E0314AEA50701E78E332A0B0 /* DirectoryView.swift */,
+				B23A17DA9682B42FEC4CB6FF /* HelpView.swift */,
 				09EE584ADB35231AA3BA3B0F /* MainTabView.swift */,
 				D1428010DA51525F3AD3BBB7 /* NumberDetailView.swift */,
 				63A46C6C3D5A25AFA89F8F86 /* SettingsView.swift */,
@@ -193,7 +196,6 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					286CF64B74EE05524160E5CB = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					E0F24A8FE81BF4CD95748700 = {
@@ -241,6 +243,7 @@
 				BE461FD621369F3283FC1A69 /* DatabaseManager.swift in Sources */,
 				FF5AD09D89E782B9D5019F77 /* DeepSCIApp.swift in Sources */,
 				6B42443C2D4C95680955A910 /* DirectoryView.swift in Sources */,
+				F55C1A8CD3780456D44A54C3 /* HelpView.swift in Sources */,
 				1A46ADE9B56F65C485EDBF6B /* KeychainManager.swift in Sources */,
 				3920D76C345ABAB6CD5EC8BD /* MainTabView.swift in Sources */,
 				068B1F7FF99C47883EA18AF4 /* NumberDetailView.swift in Sources */,
@@ -282,7 +285,9 @@
 				DEVELOPMENT_TEAM = 4ADVSK467Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Deep SCI";
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -301,7 +306,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4ADVSK467Z;
 				INFOPLIST_FILE = DeepSCIDirectory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -326,7 +331,9 @@
 				DEVELOPMENT_TEAM = 4ADVSK467Z;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Deep SCI";
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -345,7 +352,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4ADVSK467Z;
 				INFOPLIST_FILE = DeepSCIDirectory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

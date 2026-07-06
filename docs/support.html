@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Redirect to Google Form -->
+    <meta http-equiv="refresh" content="2; url=https://docs.google.com/forms/d/13CRQ9jmb16aVFZFT4Td5FRRR6nxrHa7VjW0rJk5YhE0/viewform">
+    <title>Deep SCI — Support & Feedback</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0d12;
+            --accent-red: #ff3b30;
+            --text-primary: #ffffff;
+            --text-secondary: #8e8e93;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 24px;
+            margin: 0;
+        }
+
+        .card {
+            max-width: 500px;
+            background-color: #16161f;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-red);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #e02b20;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-red);
+            border-radius: 50%;
+            margin: 24px auto 0 auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Deep SCI Support</h1>
+        <p>You are being redirected to our customer support form...</p>
+        
+        <a href="https://docs.google.com/forms/d/13CRQ9jmb16aVFZFT4Td5FRRR6nxrHa7VjW0rJk5YhE0/viewform" class="btn">
+            Click here if not redirected
+        </a>
+
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // Fallback JavaScript redirect
+        setTimeout(function() {
+            window.location.href = "https://docs.google.com/forms/d/13CRQ9jmb16aVFZFT4Td5FRRR6nxrHa7VjW0rJk5YhE0/viewform";
+        }, 2000);
+    </script>
+
+</body>
+</html>

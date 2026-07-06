@@ -12,6 +12,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.deepsci.app
         INFOPLIST_KEY_CFBundleDisplayName: "Deep SCI"
+        INFOPLIST_KEY_CFBundleIconName: AppIcon
+        INFOPLIST_KEY_UIRequiresFullScreen: Yes
         INFOPLIST_KEY_UILaunchScreen_Generation: Yes
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
@@ -31,6 +33,7 @@ targets:
     info:
       path: DeepSCIDirectory/Info.plist
       properties:
+        CFBundleDisplayName: "Deep SCI Directory"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.callkit.call-directory
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).CallDirectoryHandler
