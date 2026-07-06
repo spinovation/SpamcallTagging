@@ -16,12 +16,14 @@ targets:
         INFOPLIST_KEY_UIRequiresFullScreen: Yes
         INFOPLIST_KEY_UILaunchScreen_Generation: Yes
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: No
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         DEVELOPMENT_TEAM: "" # User can fill this in Xcode
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1"
     dependencies:
       - target: DeepSCIDirectory
   DeepSCIDirectory:
@@ -33,7 +35,7 @@ targets:
     info:
       path: DeepSCIDirectory/Info.plist
       properties:
-        CFBundleDisplayName: "Deep SCI Directory"
+        CFBundleDisplayName: "Deep SCI"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.callkit.call-directory
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).CallDirectoryHandler
@@ -44,3 +46,4 @@ targets:
         CODE_SIGN_STYLE: Automatic
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1"
