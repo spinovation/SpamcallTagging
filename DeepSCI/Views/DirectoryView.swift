@@ -1,30 +1,55 @@
 import SwiftUI
+import UIKit
 
 struct DirectoryView: View {
     @EnvironmentObject var manager: SpamManager
     @State private var searchText: String = ""
     @State private var selectedCategory: String = "All"
     @State private var selectedTier: Int = 0 // 0 = All, 1 = Tier 1, 2 = Tier 2, 3 = Tier 3
-    @State private var sortBy: SortOption = .volume
+    @State private var sortBy: SortOption = .recency
     @State private var showManualReportSheet: Bool = false
+    
+    // Version 1.1 State variables for Global Search Lookup
+    @State private var isSearchingGlobally: Bool = false
+    @State private var showingPurchasePrompt: Bool = false
+    @State private var globalLookupResult: SpamNumber? = nil
+    @State private var showingResultAlert: Bool = false
     
     enum SortOption {
         case volume, recency, number
     }
     
-    let categories = ["All", "Scam/Fraud", "Robocall", "Spam/Telemarketing", "Not Spam"]
+    let categories = ["All", "My Tags", "Scam", "Robocall", "Marketing", "Safe"]
     
     var filteredNumbers: [SpamNumber] {
-        manager.spamNumbers.filter { num in
-            // Search Match
+        let cleanSearch = searchText.filter { $0.isNumber }
+        
+        return manager.spamNumbers.filter { num in
+            let cleanNum = num.phoneNumber.filter { $0.isNumber }
+            
+            // Search Match: matches digits format-insensitively, or exact string, or caller name
             let searchMatch = searchText.isEmpty || 
-                num.phoneNumber.contains(searchText) || 
+                (!cleanSearch.isEmpty && cleanNum.contains(cleanSearch)) ||
+                num.phoneNumber.contains(searchText) ||
                 (num.callerName?.localizedCaseInsensitiveContains(searchText) ?? false)
             
             // Category Match
-            let categoryMatch = selectedCategory == "All" || 
-                num.categoryBreakdown[selectedCategory] != nil || 
-                (selectedCategory == "Not Spam" && num.primaryCategory == "Not Spam")
+            let categoryMatch: Bool
+            if selectedCategory == "All" {
+                categoryMatch = true
+            } else if selectedCategory == "My Tags" {
+                categoryMatch = num.isUserFlagged
+            } else if selectedCategory == "Safe" {
+                categoryMatch = num.primaryCategory == "Not Spam"
+            } else {
+                let dbKey: String
+                switch selectedCategory {
+                case "Scam": dbKey = "Scam/Fraud"
+                case "Marketing": dbKey = "Spam/Telemarketing"
+                default: dbKey = selectedCategory // "Robocall"
+                }
+                categoryMatch = num.categoryBreakdown[dbKey] != nil
+            }
             
             // Tier Match
             let tierMatch = selectedTier == 0 || 
@@ -69,26 +94,23 @@ struct DirectoryView: View {
                     .cornerRadius(12)
                     .padding(.horizontal)
                     
-                    // Category Chips (Horizontal Scroll)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 8) {
-                            ForEach(categories, id: \.self) { cat in
-                                Button(action: {
-                                    selectedCategory = cat
-                                }) {
-                                    Text(cat == "Spam/Telemarketing" ? "Telemarketing" : cat)
-                                        .font(.caption)
-                                        .fontWeight(.medium)
-                                        .padding(.horizontal, 12)
-                                        .padding(.vertical, 8)
-                                        .background(selectedCategory == cat ? Color.red : Color.white.opacity(0.05))
-                                        .foregroundColor(selectedCategory == cat ? .white : .secondary)
-                                        .cornerRadius(16)
-                                }
+                    // Category Chips (Reduced Padding & Spacing to fit screen)
+                    HStack(spacing: 4) {
+                        ForEach(categories, id: \.self) { cat in
+                            Button(action: {
+                                selectedCategory = cat
+                            }) {
+                                Text(cat)
+                                    .font(.system(size: 10, weight: .semibold))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 6)
+                                    .background(selectedCategory == cat ? Color.red : Color.white.opacity(0.05))
+                                    .foregroundColor(selectedCategory == cat ? .white : .secondary)
+                                    .cornerRadius(12)
                             }
                         }
-                        .padding(.horizontal)
                     }
+                    .padding(.horizontal, 8)
                     
                     // Tier & Sort Selection Row
                     HStack {
@@ -142,13 +164,64 @@ struct DirectoryView: View {
                 
                 // MARK: - Directory List
                 if filteredNumbers.isEmpty {
-                    VStack(spacing: 12) {
-                        Image(systemName: "phone.slash")
-                            .font(.system(size: 40))
-                            .foregroundColor(.secondary)
-                        Text("No Flagged Numbers Found")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
+                    VStack(spacing: 24) {
+                        if isSearchTextAPhoneNumber {
+                            VStack(spacing: 16) {
+                                Image(systemName: "magnifyingglass.circle.fill")
+                                    .font(.system(size: 60))
+                                    .foregroundColor(.red)
+                                
+                                Text("Search Global Spam Registry")
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                
+                                Text("This number is not in your local database. You can perform a real-time carrier lookup.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 32)
+                                
+                                VStack(spacing: 4) {
+                                    Text("Free Monthly Lookups: \(manager.freeLookupsLeft)")
+                                    Text("Purchased Credits: \(manager.purchasedCredits)")
+                                }
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .padding(.vertical, 4)
+                                
+                                if isSearchingGlobally {
+                                    ProgressView("Querying CNAM Registry...")
+                                        .tint(.red)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                } else {
+                                    Button(action: {
+                                        performGlobalSearchLookup()
+                                    }) {
+                                        Text("Lookup Globally")
+                                            .font(.headline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 24)
+                                            .padding(.vertical, 12)
+                                            .background(Color.red)
+                                            .cornerRadius(10)
+                                    }
+                                }
+                            }
+                            .padding()
+                            .background(Color.white.opacity(0.04))
+                            .cornerRadius(16)
+                            .padding(.horizontal)
+                        } else {
+                            Image(systemName: "phone.slash")
+                                .font(.system(size: 40))
+                                .foregroundColor(.secondary)
+                            Text("No Flagged Numbers Found")
+                                .font(.headline)
+                                .foregroundColor(.secondary)
+                        }
                     }
                     .frame(maxHeight: .infinity)
                 } else {
@@ -184,6 +257,55 @@ struct DirectoryView: View {
                 }
                 .presentationDetents([.fraction(0.60)])
             }
+            .alert("Search Results Found", isPresented: $showingResultAlert, presenting: globalLookupResult) { num in
+                Button("View Details") {
+                    searchText = num.phoneNumber
+                }
+                Button("Done", role: .cancel) { }
+            } message: { num in
+                Text("Number: \(num.phoneNumber)\nCaller: \(num.callerName ?? "Unknown")\nCarrier: \(num.carrier ?? "Unknown")\n\nThis number has been added to your local database directory.")
+            }
+            .sheet(isPresented: $showingPurchasePrompt) {
+                VStack(spacing: 24) {
+                    Image(systemName: "creditcard.circle.fill")
+                        .font(.system(size: 60))
+                        .foregroundColor(.red)
+                    
+                    Text("Out of Lookup Credits")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Text("You have used all your free monthly lookups. Purchase a 10-lookup credit pack to continue checking numbers globally.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 24)
+                    
+                    Button(action: {
+                        manager.buyCreditPack()
+                        showingPurchasePrompt = false
+                    }) {
+                        Text("Buy 10 Credits for $0.99")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(12)
+                    }
+                    
+                    Button("Cancel", role: .cancel) {
+                        showingPurchasePrompt = false
+                    }
+                    .foregroundColor(.secondary)
+                }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(.systemGray6))
+                .presentationDetents([.fraction(0.45)])
+            }
         }
     }
     
@@ -203,6 +325,34 @@ struct DirectoryView: View {
         case .number: return "Sort: Number"
         }
     }
+    
+    // MARK: - Version 1.1 Global Search Helpers
+    
+    private var isSearchTextAPhoneNumber: Bool {
+        let clean = searchText.filter { $0.isNumber }
+        return clean.count >= 7
+    }
+    
+    private func performGlobalSearchLookup() {
+        guard manager.freeLookupsLeft > 0 || manager.purchasedCredits > 0 else {
+            showingPurchasePrompt = true
+            return
+        }
+        
+        isSearchingGlobally = true
+        manager.performGlobalLookup(phoneNumber: searchText) { result in
+            DispatchQueue.main.async {
+                self.isSearchingGlobally = false
+                switch result {
+                case .success(let number):
+                    self.globalLookupResult = number
+                    self.showingResultAlert = true
+                case .failure(let error):
+                    print("Global lookup error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }
 
 // MARK: - List Row Subview
@@ -215,7 +365,7 @@ struct DirectoryRowView: View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    Text(number.phoneNumber)
+                    Text(formatPhoneNumber(number.phoneNumber))
                         .font(.headline)
                         .foregroundColor(.white)
                     
@@ -299,17 +449,11 @@ struct ManualReportSheet: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
-                Text("Report a Spam Number")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top)
-                
                 Text("Enter the phone number that called you to tag and add it to the Deep SCI spam database.")
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 10)
                 
                 // Phone Number Input
                 VStack(alignment: .leading, spacing: 8) {
@@ -386,10 +530,24 @@ struct ManualReportSheet: View {
             }
             .padding()
             .background(Color(.systemGray6))
+            .navigationTitle("Report a Spam Number")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") { dismiss() }
                         .foregroundColor(.red)
+                }
+            }
+            .onAppear {
+                if UIPasteboard.general.hasStrings {
+                    if let copied = UIPasteboard.general.string {
+                        // Accept number if it contains between 7 and 18 digits (standard phone number range)
+                        let clean = copied.filter { $0.isNumber }
+                        if clean.count >= 7 && clean.count <= 18 {
+                            self.phoneNumber = copied
+                            print("📋 [ManualReportSheet] Auto-filled clipboard phone number: \(copied)")
+                        }
+                    }
                 }
             }
         }

@@ -13,7 +13,7 @@ struct NumberDetailView: View {
                 
                 // MARK: - Hero Header Card
                 VStack(spacing: 12) {
-                    Text(number.phoneNumber)
+                    Text(formatPhoneNumber(number.phoneNumber))
                         .font(.system(size: 32, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                     

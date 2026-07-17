@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 struct SettingsView: View {
     @EnvironmentObject var manager: SpamManager
@@ -141,6 +142,58 @@ struct SettingsView: View {
                 }
                 .listRowBackground(Color.white.opacity(0.02))
                 
+                // MARK: - Lookup Credits
+                Section("Lookup Credits") {
+                    HStack {
+                        Text("Free Monthly Lookups")
+                            .foregroundColor(.white)
+                        Spacer()
+                        Text("\(manager.freeLookupsLeft)")
+                            .fontWeight(.semibold)
+                            .foregroundColor(manager.freeLookupsLeft > 0 ? .green : .red)
+                    }
+                    
+                    HStack {
+                        Text("Purchased Search Credits")
+                            .foregroundColor(.white)
+                        Spacer()
+                        Text("\(manager.purchasedCredits)")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.green)
+                    }
+                    
+                    Button(action: {
+                        manager.buyCreditPack()
+                    }) {
+                        Label("Buy 10 Credits ($0.99)", systemImage: "plus.circle.fill")
+                            .foregroundColor(.red)
+                    }
+                    
+                    Button(action: {
+                        Task {
+                            // Present native App Store promo code redemption sheet
+                            #if canImport(StoreKit)
+                            if let windowScene = await UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                                try? await AppStore.presentOfferCodeRedeemSheet(in: windowScene)
+                            }
+                            #endif
+                        }
+                    }) {
+                        Label("Redeem Promo Code", systemImage: "ticket.fill")
+                            .foregroundColor(.orange)
+                    }
+                }
+                .listRowBackground(Color.white.opacity(0.02))
+                
+                // MARK: - Developer Options
+                if manager.showDeveloperTools {
+                    Section("Developer Options") {
+                        Toggle("Enable Sandbox Simulator", isOn: $manager.showDeveloperTools)
+                            .tint(.red)
+                    }
+                    .listRowBackground(Color.white.opacity(0.02))
+                }
+                
                 // MARK: - App Version Info
                 Section("App Information") {
                     HStack {
@@ -149,6 +202,10 @@ struct SettingsView: View {
                         Spacer()
                         Text("\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"))")
                             .foregroundColor(.secondary)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture(count: 5) {
+                        manager.toggleDeveloperTools()
                     }
                 }
                 .listRowBackground(Color.white.opacity(0.02))

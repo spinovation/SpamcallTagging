@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject var manager: SpamManager
     @State private var selectedTab: Int = 0
     
     var body: some View {
@@ -17,11 +18,13 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            SimulatorView()
-                .tabItem {
-                    Label("Simulator", systemImage: "phone.badge.plus")
-                }
-                .tag(2)
+            if manager.showDeveloperTools {
+                SimulatorView()
+                    .tabItem {
+                        Label("Simulator", systemImage: "phone.badge.plus")
+                    }
+                    .tag(2)
+            }
             
             SettingsView()
                 .tabItem {

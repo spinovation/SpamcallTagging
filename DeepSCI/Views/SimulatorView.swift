@@ -19,6 +19,7 @@ struct SimulatorView: View {
     @State private var selectedCallForTagging: MockCall? = nil
     @State private var showConfirmation: Bool = false
     @State private var confirmedCategory: String = ""
+    @State private var showRateLimitAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -56,7 +57,7 @@ struct SimulatorView: View {
                                     .frame(width: 24, height: 24)
                                 
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(call.phoneNumber)
+                                    Text(formatPhoneNumber(call.phoneNumber))
                                         .font(.headline)
                                         .foregroundColor(.white)
                                     
@@ -137,6 +138,11 @@ struct SimulatorView: View {
                     .transition(.scale.combined(with: .opacity))
                 }
             }
+            .alert("Already Tagged", isPresented: $showRateLimitAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("You have already reported this phone number within the last 24 hours. To prevent abuse, each number can only be tagged once per day.")
+            }
         }
     }
     
@@ -204,22 +210,28 @@ struct SimulatorView: View {
     }
     
     private func submitTag(for phoneNumber: String, category: String) {
-        // Submit Tag
-        manager.tagNumber(phoneNumber: phoneNumber, category: category, geoRegion: "206")
+        // Submit Tag and check if it was accepted or rate-limited
+        let didSubmit = manager.tagNumber(phoneNumber: phoneNumber, category: category, geoRegion: "206")
         
-        // Show overlay confirmation
-        confirmedCategory = category
         selectedCallForTagging = nil
         
-        withAnimation(.spring()) {
-            showConfirmation = true
-        }
-        
-        // Hide confirmation after 2.5s
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            withAnimation {
-                showConfirmation = false
+        if didSubmit {
+            // Show overlay confirmation
+            confirmedCategory = category
+            
+            withAnimation(.spring()) {
+                showConfirmation = true
             }
+            
+            // Hide confirmation after 2.5s
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                withAnimation {
+                    showConfirmation = false
+                }
+            }
+        } else {
+            // Trigger rate limit alert
+            showRateLimitAlert = true
         }
     }
 }

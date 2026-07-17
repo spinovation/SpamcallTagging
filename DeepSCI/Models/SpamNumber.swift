@@ -47,6 +47,7 @@ public struct SpamNumber: Codable, Identifiable, Hashable {
     // Tier 3 (50+ tags / DNO matched): Blocked (Block at system level)
     public func threatTier(threshold: Int) -> Int {
         if dnoMatched { return 3 }
+        if isUserFlagged { return 3 } // If manually reported by this user, block immediately!
         
         let tier1Threshold = max(1, threshold / 3) // e.g. 3 tags
         let tier2Threshold = threshold             // e.g. 10 tags

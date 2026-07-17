@@ -61,23 +61,44 @@ struct HelpView: View {
                             .font(.headline)
                             .foregroundColor(.white)
                         
-                        Text("If you have any questions, feedback, or need support with the app, send an email directly to our support team.")
+                        Text("If you have any questions, feedback, or need support with the app, we are here to help.")
                             .font(.caption)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
                         
-                        Link(destination: URL(string: "mailto:sridhargs@gmail.com?subject=Deep%20SCI%20Feedback%20%26%20Support")!) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "envelope.fill")
-                                Text("Email sridhargs@gmail.com")
-                                    .fontWeight(.bold)
+                        VStack(spacing: 12) {
+                            // Primary Web Support Form
+                            Link(destination: URL(string: "https://docs.google.com/forms/d/13CRQ9jmb16aVFZFT4Td5FRRR6nxrHa7VjW0rJk5YhE0/viewform")!) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "safari.fill")
+                                    Text("Open Support Form")
+                                        .fontWeight(.bold)
+                                }
                             }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.red)
+                            .background(Color.blue)
                             .cornerRadius(12)
+                            
+                            // Secondary Email Support
+                            Link(destination: URL(string: "mailto:sridhargs@gmail.com?subject=Deep%20SCI%20Feedback%20%26%20Support")!) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "envelope.fill")
+                                    Text("Send Email Support")
+                                        .fontWeight(.semibold)
+                                }
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color.white.opacity(0.06))
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                            )
                         }
                     }
                     .padding()

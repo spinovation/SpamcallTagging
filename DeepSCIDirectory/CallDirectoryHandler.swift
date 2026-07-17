@@ -13,6 +13,7 @@ public final class CallDirectoryHandler: CXCallDirectoryProvider {
         let categoryBreakdown: [String: Int]
         let totalTags: Int
         let dnoMatched: Bool
+        let isUserFlagged: Bool?
         
         var primaryCategory: String {
             if categoryBreakdown.isEmpty { return "Spam" }
@@ -21,6 +22,7 @@ public final class CallDirectoryHandler: CXCallDirectoryProvider {
         
         func threatTier(threshold: Int) -> Int {
             if dnoMatched { return 3 }
+            if isUserFlagged == true { return 3 } // If manually reported by this user, block immediately!
             
             let tier1Threshold = max(1, threshold / 3) // e.g. 3 tags
             let tier2Threshold = threshold             // e.g. 10 tags
