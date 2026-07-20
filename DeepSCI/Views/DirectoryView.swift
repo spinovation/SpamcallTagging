@@ -94,23 +94,27 @@ struct DirectoryView: View {
                     .cornerRadius(12)
                     .padding(.horizontal)
                     
-                    // Category Chips (Reduced Padding & Spacing to fit screen)
-                    HStack(spacing: 4) {
-                        ForEach(categories, id: \.self) { cat in
-                            Button(action: {
-                                selectedCategory = cat
-                            }) {
-                                Text(cat)
-                                    .font(.system(size: 10, weight: .semibold))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 6)
-                                    .background(selectedCategory == cat ? Color.red : Color.white.opacity(0.05))
-                                    .foregroundColor(selectedCategory == cat ? .white : .secondary)
-                                    .cornerRadius(12)
+                    // Category Chips (Horizontal Scroll to prevent vertical wrapping)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(categories, id: \.self) { cat in
+                                Button(action: {
+                                    selectedCategory = cat
+                                }) {
+                                    Text(cat)
+                                        .font(.system(size: 12, weight: .semibold))
+                                        .lineLimit(1)
+                                        .fixedSize(horizontal: true, vertical: false)
+                                        .padding(.horizontal, 14)
+                                        .padding(.vertical, 8)
+                                        .background(selectedCategory == cat ? Color.red : Color.white.opacity(0.05))
+                                        .foregroundColor(selectedCategory == cat ? .white : .secondary)
+                                        .cornerRadius(16)
+                                }
                             }
                         }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal, 8)
                     
                     // Tier & Sort Selection Row
                     HStack {
@@ -255,7 +259,7 @@ struct DirectoryView: View {
                     // Clean and submit
                     manager.tagNumber(phoneNumber: phone, category: category, geoRegion: "Manual")
                 }
-                .presentationDetents([.fraction(0.60)])
+                .presentationDetents([.fraction(0.65)])
             }
             .alert("Search Results Found", isPresented: $showingResultAlert, presenting: globalLookupResult) { num in
                 Button("View Details") {
@@ -448,89 +452,91 @@ struct ManualReportSheet: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                Text("Enter the phone number that called you to tag and add it to the Deep SCI spam database.")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 10)
-                
-                // Phone Number Input
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Phone Number")
+            ScrollView {
+                VStack(spacing: 24) {
+                    Text("Enter the phone number that called you to tag and add it to the Deep SCI spam database.")
                         .font(.caption)
-                        .fontWeight(.semibold)
                         .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 12)
                     
-                    HStack {
-                        Image(systemName: "phone.fill")
+                    // Phone Number Input
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Phone Number")
+                            .font(.caption)
+                            .fontWeight(.semibold)
                             .foregroundColor(.secondary)
-                        TextField("+1 (555) 000-0000", text: $phoneNumber)
-                            .keyboardType(.phonePad)
-                            .foregroundColor(.white)
-                            .autocorrectionDisabled()
-                    }
-                    .padding()
-                    .background(Color.white.opacity(0.06))
-                    .cornerRadius(12)
-                }
-                
-                // Category Picker
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Select Spam Category")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
-                    
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                        ForEach(categories, id: \.1) { name, key, color, icon in
-                            Button(action: {
-                                selectedCategory = key
-                            }) {
-                                HStack {
-                                    Image(systemName: icon)
-                                    Text(name)
-                                        .font(.caption)
-                                        .fontWeight(.semibold)
-                                }
+                        
+                        HStack {
+                            Image(systemName: "phone.fill")
+                                .foregroundColor(.secondary)
+                            TextField("+1 (555) 000-0000", text: $phoneNumber)
+                                .keyboardType(.phonePad)
                                 .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 12)
-                                .background(selectedCategory == key ? color.opacity(0.2) : Color.white.opacity(0.05))
-                                .cornerRadius(10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(selectedCategory == key ? color : Color.white.opacity(0.1), lineWidth: 1.5)
-                                )
+                                .autocorrectionDisabled()
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.06))
+                        .cornerRadius(12)
+                    }
+                    
+                    // Category Picker
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Select Spam Category")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.secondary)
+                        
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                            ForEach(categories, id: \.1) { name, key, color, icon in
+                                Button(action: {
+                                    selectedCategory = key
+                                }) {
+                                    HStack {
+                                        Image(systemName: icon)
+                                        Text(name)
+                                            .font(.caption)
+                                            .fontWeight(.semibold)
+                                    }
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 12)
+                                    .background(selectedCategory == key ? color.opacity(0.2) : Color.white.opacity(0.05))
+                                    .cornerRadius(10)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(selectedCategory == key ? color : Color.white.opacity(0.1), lineWidth: 1.5)
+                                    )
+                                }
                             }
                         }
                     }
+                    
+                    Spacer(minLength: 20)
+                    
+                    // Submit Button
+                    Button(action: {
+                        let cleaned = phoneNumber.filter { $0.isNumber || $0 == "+" }
+                        guard !cleaned.isEmpty else { return }
+                        onTagSubmitted(cleaned, selectedCategory)
+                        dismiss()
+                    }) {
+                        Text("Submit Report")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(phoneNumber.filter { $0.isNumber }.isEmpty ? Color.gray.opacity(0.3) : Color.red)
+                            .cornerRadius(12)
+                    }
+                    .disabled(phoneNumber.filter { $0.isNumber }.isEmpty)
+                    .padding(.bottom, 24)
                 }
-                
-                Spacer()
-                
-                // Submit Button
-                Button(action: {
-                    let cleaned = phoneNumber.filter { $0.isNumber || $0 == "+" }
-                    guard !cleaned.isEmpty else { return }
-                    onTagSubmitted(cleaned, selectedCategory)
-                    dismiss()
-                }) {
-                    Text("Submit Report")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(phoneNumber.filter { $0.isNumber }.isEmpty ? Color.gray.opacity(0.3) : Color.red)
-                        .cornerRadius(12)
-                }
-                .disabled(phoneNumber.filter { $0.isNumber }.isEmpty)
-                .padding(.bottom)
+                .padding()
             }
-            .padding()
             .background(Color(.systemGray6))
-            .navigationTitle("Report a Spam Number")
+            .navigationTitle("Report Spammer")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
