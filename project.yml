@@ -21,8 +21,8 @@ targets:
         DEVELOPMENT_TEAM: "" # User can fill this in Xcode
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
-        MARKETING_VERSION: "1.1"
-        CURRENT_PROJECT_VERSION: "4"
+        MARKETING_VERSION: "1.1.1"
+        CURRENT_PROJECT_VERSION: "1"
         TARGETED_DEVICE_FAMILY: "1"
     dependencies:
       - target: DeepSCIDirectory
@@ -44,6 +44,6 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.deepsci.app.directory
         DEVELOPMENT_TEAM: ""
         CODE_SIGN_STYLE: Automatic
-        MARKETING_VERSION: "1.1"
-        CURRENT_PROJECT_VERSION: "4"
+        MARKETING_VERSION: "1.1.1"
+        CURRENT_PROJECT_VERSION: "1"
         TARGETED_DEVICE_FAMILY: "1"
