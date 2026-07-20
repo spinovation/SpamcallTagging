@@ -11,8 +11,8 @@ import java.util.Locale
 class SyncService private constructor() {
     
     companion object {
-        val shared = SyncService()
         private var globalServerDatabase: MutableList<SpamNumber> = mutableListOf()
+        val shared = SyncService()
     }
     
     init {
